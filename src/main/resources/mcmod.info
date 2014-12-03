@@ -1,0 +1,18 @@
+[
+{
+  "modid": "TestMod",
+  "name": "Test Mod",
+  "description": "Just a plain old test!",
+  "version": "1.7.10-1.0",
+  "credits": "Created by Helios811",
+  "mcversion": "1.7.10",
+  //"url": "http://www.mod-buildcraft.com/",
+  "updateUrl": "",
+  "authors": [ "Helios811" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+	 "mod_MinecraftForge"
+]
+}
+]
