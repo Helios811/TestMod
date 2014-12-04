@@ -1,42 +1,49 @@
 package com.Helios811.TestMod.handler;
 
 
+import com.Helios811.TestMod.reference.Reference;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
 public class ConfigurationHandler {
 
+
     public static Configuration configuration;
+    public static boolean testValue = false;
 
     public static void init(File configFile)
     {
-        Configuration configuration = new Configuration(configFile);
-        boolean configValue = false;
-
-
-
-        try
+        if(configuration == null)
         {
-            configuration.load();
-
-            configValue = configuration.get(Configuration.CATEGORY_GENERAL, "configValue", true, "This is an example config value.").getBoolean(true);
-        }
-        catch (Exception e)
-        {
-
-        }
-        finally
-        {
-            if (configuration.hasChanged()) {
-
-                configuration.save();
-            }
+            configuration = new Configuration(configFile);
         }
 
+    }
 
 
-            System.out.println("Configuration Value: " + configValue);
+
+    @SubscribeEvent
+    public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if(event.modID.equalsIgnoreCase(Reference.MOD_ID))
+        {
+            loadConfiguration();
+
+        }
+
+    }
+
+    public void loadConfiguration()
+    {
+        testValue = configuration.getBoolean("configValue", Configuration.CATEGORY_GENERAL, false, "This is an example config value.");
+
+        if (configuration.hasChanged()) {
+
+            configuration.save();
+        }
 
     }
 }
